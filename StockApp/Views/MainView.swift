@@ -9,6 +9,21 @@ import SwiftUI
 
 struct MainView: View {
     @State var favouriteFilterOn : Bool = false
+    @ObservedObject var manager = StockManager()
+    var symbols : [String] = ["AAPL", "MSFT","GOOG","AMZN","FB"]
+    
+    func fetchData(){
+        manager.download(symbols: symbols){_ in
+            
+        }
+    }
+    
+    func fetchImages(){
+        manager.downloadImages(symbols: symbols){_ in
+            
+        }
+    }
+    
     
     var body: some View {
         VStack{
@@ -36,30 +51,63 @@ struct MainView: View {
                         .foregroundColor(.black)
                         .opacity(favouriteFilterOn ? 0.8 : 0.4)
                         .padding(.horizontal)
-                        
+                    
                     
                 })
                 
                 Spacer()
             }.padding(.horizontal)
             
-            StockListView()
+            StockListView(manager: manager)
         }
+        .onAppear(perform: fetchData)
+        .onAppear(perform: fetchImages)
+        
     }
 }
 
 
 struct StockListView: View{
-    var body: some View{
-        VStack(alignment:.leading){
-            
-            List{
-                SingleStockView(name: "Yandex, LLC", ticker: "YNDX", price: 1234.789847, delta: 0.765, isColoured: true)
-            }
+    @ObservedObject var manager : StockManager
+    var symbols : [String] = ["AAPL", "MSFT","GOOG","AMZN","FB"]
+    @State var logos : [CompanyImage] = []
+    @State var stocks : [Stock] = []
+    
+    func fetchData(){
+        manager.download(symbols: symbols){_ in
             
         }
     }
-}
+    
+    func fetchImages(){
+        manager.downloadImages(symbols: symbols){_ in
+            logos = manager.logos!
+        }
+    }
+    
+    
+    init(manager : StockManager) {
+        self.manager = manager
+    }
+    
+    var body: some View{
+        VStack(alignment:.leading){
+            
+            List(manager.stocks, id: \.symbol){item in
+                        SingleStockView(name: item.companyName, ticker: item.symbol, price: item.latestPrice, delta: item.change, image: manager.logos!.count > 0 ? (manager.logos?.first(where: {$0.name == item.symbol})?.image)! : UIImage(), isColoured: true)
+                    }
+                    
+                }.onChange(of: manager.logos?.count, perform: { value in
+                    
+                })
+                
+            
+        }
+        
+        
+        
+    }
+
 
 struct SearchBarView: View{
     @State var str: String = ""
@@ -83,14 +131,16 @@ struct SingleStockView: View{
     var ticker : String
     var currentPrice : Double
     var dayDelta : Double
+    var image : UIImage
     @State var isFavourite : Bool = false
     
-    init(name: String, ticker: String, price: Double, delta: Double, isColoured : Bool){
+    init(name: String, ticker: String, price: Double, delta: Double, image: UIImage, isColoured : Bool){
         
         companyName = name
         self.ticker = ticker
         currentPrice = price
         dayDelta = delta
+        self.image = image
         if isColoured == true {
             color = Color(red: 240/255, green: 244/255, blue: 247/255, opacity: 1)
         }else{
@@ -105,11 +155,14 @@ struct SingleStockView: View{
                 .fill(color)
                 .frame(width: .infinity, height: 80)
             HStack{
-                Image(systemName: "leaf.fill")
-                    .foregroundColor(.green)
-                    .font(.system(size: 45))
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .padding(.leading, 15)
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 60, height: 60)
+                    // .foregroundColor(.green)
+                    // .font(.system(size: 45))
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    .padding(.leading, 5)
                 
                 
                 VStack(alignment: .leading){

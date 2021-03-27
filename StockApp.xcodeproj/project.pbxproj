@@ -14,6 +14,13 @@
 		DB2E5DB0260D318500280AB0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5DAF260D318500280AB0 /* Persistence.swift */; };
 		DB2E5DB3260D318500280AB0 /* StockApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5DB1260D318500280AB0 /* StockApp.xcdatamodeld */; };
 		DB2E5DC2260D32A800280AB0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5DC1260D32A800280AB0 /* MainView.swift */; };
+		DB2E5DC7260E6E5400280AB0 /* ListStocksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5DC6260E6E5400280AB0 /* ListStocksViewModel.swift */; };
+		DB2E5DCC260E771400280AB0 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5DCB260E771400280AB0 /* Stock.swift */; };
+		DB2E5DD1260F5A8800280AB0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5DD0260F5A8700280AB0 /* NetworkManager.swift */; };
+		DB2E5DD5260F650F00280AB0 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5DD4260F650F00280AB0 /* APIManager.swift */; };
+		DB2E5DD8260F6B8300280AB0 /* StockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5DD7260F6B8300280AB0 /* StockManager.swift */; };
+		DB2E5DDB260F9BF400280AB0 /* ImageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5DDA260F9BF300280AB0 /* ImageURL.swift */; };
+		DB2E5DDE260FB94000280AB0 /* CompanyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5DDD260FB94000280AB0 /* CompanyImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +33,13 @@
 		DB2E5DB2260D318500280AB0 /* StockApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StockApp.xcdatamodel; sourceTree = "<group>"; };
 		DB2E5DB4260D318500280AB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB2E5DC1260D32A800280AB0 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		DB2E5DC6260E6E5400280AB0 /* ListStocksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListStocksViewModel.swift; sourceTree = "<group>"; };
+		DB2E5DCB260E771400280AB0 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
+		DB2E5DD0260F5A8700280AB0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		DB2E5DD4260F650F00280AB0 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		DB2E5DD7260F6B8300280AB0 /* StockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockManager.swift; sourceTree = "<group>"; };
+		DB2E5DDA260F9BF300280AB0 /* ImageURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURL.swift; sourceTree = "<group>"; };
+		DB2E5DDD260FB94000280AB0 /* CompanyImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +72,9 @@
 		DB2E5DA5260D317700280AB0 /* StockApp */ = {
 			isa = PBXGroup;
 			children = (
+				DB2E5DCF260F5A6900280AB0 /* Managers */,
+				DB2E5DCA260E76FA00280AB0 /* Models */,
+				DB2E5DC5260E6DD900280AB0 /* ViewModels */,
 				DB2E5DBB260D31AA00280AB0 /* Views */,
 				DB2E5DA6260D317700280AB0 /* StockAppApp.swift */,
 				DB2E5DA8260D317700280AB0 /* ContentView.swift */,
@@ -84,6 +101,34 @@
 				DB2E5DC1260D32A800280AB0 /* MainView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		DB2E5DC5260E6DD900280AB0 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				DB2E5DC6260E6E5400280AB0 /* ListStocksViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		DB2E5DCA260E76FA00280AB0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DB2E5DCB260E771400280AB0 /* Stock.swift */,
+				DB2E5DDA260F9BF300280AB0 /* ImageURL.swift */,
+				DB2E5DDD260FB94000280AB0 /* CompanyImage.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DB2E5DCF260F5A6900280AB0 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				DB2E5DD0260F5A8700280AB0 /* NetworkManager.swift */,
+				DB2E5DD4260F650F00280AB0 /* APIManager.swift */,
+				DB2E5DD7260F6B8300280AB0 /* StockManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,9 +202,16 @@
 			files = (
 				DB2E5DB0260D318500280AB0 /* Persistence.swift in Sources */,
 				DB2E5DA9260D317700280AB0 /* ContentView.swift in Sources */,
+				DB2E5DD8260F6B8300280AB0 /* StockManager.swift in Sources */,
+				DB2E5DDE260FB94000280AB0 /* CompanyImage.swift in Sources */,
 				DB2E5DB3260D318500280AB0 /* StockApp.xcdatamodeld in Sources */,
+				DB2E5DD5260F650F00280AB0 /* APIManager.swift in Sources */,
+				DB2E5DCC260E771400280AB0 /* Stock.swift in Sources */,
+				DB2E5DD1260F5A8800280AB0 /* NetworkManager.swift in Sources */,
 				DB2E5DC2260D32A800280AB0 /* MainView.swift in Sources */,
 				DB2E5DA7260D317700280AB0 /* StockAppApp.swift in Sources */,
+				DB2E5DDB260F9BF400280AB0 /* ImageURL.swift in Sources */,
+				DB2E5DC7260E6E5400280AB0 /* ListStocksViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
