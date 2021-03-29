@@ -13,7 +13,6 @@ struct Stock : Codable{
     var latestPrice : Double
     var change : Double
     var changePercent : Double
-  //  var isFavourite : Bool = false
     
     
     private enum Keys: String, CodingKey{

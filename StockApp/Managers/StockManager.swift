@@ -13,6 +13,37 @@ final class StockManager: ObservableObject{
     
     @Published var stocks = [Stock]()
     @Published var logos : [CompanyImage]? = []
+    @Published var favourites = [StockInListModel]()
+    @Published var favouriteFilterOn = false
+   
+    func checkInFavourites(ticker: String) -> Bool{
+        for item in favourites {
+            if item.symbol == ticker {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func addToFavourites(stock: StockInListModel){
+        for st in favourites {
+            if st.symbol == stock.symbol {
+                return
+            }
+        }
+        favourites.append(stock)
+    }
+    
+    func removeFromFavourites(stock: StockInListModel){
+        var index : Int = 0
+        for st in favourites {
+            if st.symbol == stock.symbol {
+                favourites.remove(at: index)
+            }
+            index+=1
+        }
+    }
     
     func download(symbols: [String], completion: @escaping (Result<[Stock],NetworkError>)-> Void){
         var stockArray = [Stock]()
@@ -41,7 +72,8 @@ final class StockManager: ObservableObject{
         downloadGroup.notify(queue: DispatchQueue.global()){
             completion(.success(stockArray))
             DispatchQueue.main.async {
-                self.stocks.append(contentsOf: stockArray)
+                    self.stocks.append(contentsOf: stockArray)
+
             }
         }
     }
@@ -83,8 +115,9 @@ final class StockManager: ObservableObject{
         downloadGroup.notify(queue: DispatchQueue.global()){
             completion(.success(companyImages))
             DispatchQueue.main.async {
-                self.logos!.append(contentsOf: companyImages)
-               
+              
+                    self.logos!.append(contentsOf: companyImages)
+                
             }
         }
         
