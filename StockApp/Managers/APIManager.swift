@@ -7,6 +7,10 @@
 
 import Foundation
 
+/**
+ API менеджер для работы с IEX API
+
+ */
 struct APIManager{
     
     static var baseURL : String{
@@ -24,15 +28,18 @@ struct APIManager{
         }
     }
     
+    // Функция для возвращения адреса для запроса акции.
     static func getQuoteURL(for symbol: String) -> String{
         getURL(by: .quote , symbol: symbol)
     }
     
+    // Функция для возвращения адреса для запроса изображения.
     static func getImageURL(for symbol: String) -> String{
         getURL(by: .logo, symbol: symbol)
     }
     
     
+    // Варианты запросов.
     private enum QueryKeys: String{
         case quote = "quote"
         case logo = "logo"
@@ -41,6 +48,8 @@ struct APIManager{
 }
 
 extension APIManager{
+    
+    // Токен для получения доступа к API.
     static var token : String{
         return "pk_25e21941845c4f51a74fe798445e666c"
     }

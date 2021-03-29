@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// Другое представление для акции
 struct StockInListModel{
     var companyName : String
     var symbol : String

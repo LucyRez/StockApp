@@ -7,6 +7,8 @@
 
 import Foundation
 
+// Модель акции (такой же формат подаёт нам API)
+// учавствует только при декодировании
 struct Stock : Codable{
     var companyName : String
     var symbol : String

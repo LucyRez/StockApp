@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Модель для ссылки на изображение (такую же получаем от API)
 struct ImageURL : Codable{
     var url : String
 

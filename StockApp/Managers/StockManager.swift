@@ -7,25 +7,25 @@
 
 import Foundation
 import UIKit
-
+// Данный класс отвечает за основную логику приложения.
 final class StockManager: ObservableObject{
     
-    
-    @Published var stocks = [Stock]()
-    @Published var logos : [CompanyImage]? = []
-    @Published var favourites = [StockInListModel]()
-    @Published var favouriteFilterOn = false
+    @Published var stocks = [Stock]() // Все получаемые акции.
+    @Published var logos : [CompanyImage]? = [] // Все изображения компаний.
+    @Published var favourites = [StockInListModel]() // Массив для записи фаворитов.
+    @Published var favouriteFilterOn = false // Булевая переменная указывает включен ли фильтр по фаворитам.
    
+    // Функция проверяет, принадлежит ли акция к фаворитам или нет.
     func checkInFavourites(ticker: String) -> Bool{
         for item in favourites {
             if item.symbol == ticker {
                 return true
             }
         }
-        
         return false
     }
     
+    // Функция осуществляет добавление акции в массив фаворитов.
     func addToFavourites(stock: StockInListModel){
         for st in favourites {
             if st.symbol == stock.symbol {
@@ -35,6 +35,7 @@ final class StockManager: ObservableObject{
         favourites.append(stock)
     }
     
+    // Функция осуществляет удаление из массива.
     func removeFromFavourites(stock: StockInListModel){
         var index : Int = 0
         for st in favourites {
@@ -45,6 +46,7 @@ final class StockManager: ObservableObject{
         }
     }
     
+    // Функция осуществляет скачивание всех акций и запись их в массив.
     func download(symbols: [String], completion: @escaping (Result<[Stock],NetworkError>)-> Void){
         var stockArray = [Stock]()
         let downloadQueue = DispatchQueue(label: "downloadStock")
@@ -83,9 +85,9 @@ final class StockManager: ObservableObject{
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
+    // Функция осуществляет скачивание всех изображений и запись их в массив.
     func downloadImages(symbols: [String], completion: @escaping (Result<[CompanyImage], NetworkError>)-> Void){
         var companyImages = [CompanyImage]()
-        var imageURL : String = ""
         let downloadQueue = DispatchQueue(label: "downloadImages")
         let downloadGroup = DispatchGroup()
         

@@ -7,8 +7,13 @@
 
 import Foundation
 
+/**
+ Данный класс отвечает за получение данных по адресу и их декодировку.
+
+ */
 final class NetworkManager<T:Codable>{
     
+    // Метод декодирует данные по ссылке.
     func fetchData(url: URL, completion: @escaping (Result<T, NetworkError>) -> Void){
         URLSession.shared.dataTask(with: url){ (data, response, error) in
             
@@ -39,6 +44,7 @@ final class NetworkManager<T:Codable>{
    
 }
 
+// Енум с вариантами ошибок.
 enum NetworkError : Error{
     case error(err: String)
     case invalidResponse(response: String)

@@ -10,6 +10,8 @@ import SwiftUI
 struct MainView: View {
     @ObservedObject var manager = StockManager()
     @State var favourites : [Stock] = []
+    
+    // Изначальные тикеры.
     var symbols : [String] = ["AAPL", "MSFT","GOOGL","AMZN","FB", "TSLA", "MA", "BAC", "YNDX", "DIS", "GE"]
     
     func fetchData(){
@@ -61,7 +63,7 @@ struct MainView: View {
             
             StockListView(manager: manager)
         }
-        .onAppear(perform: fetchData)
+        .onAppear(perform: fetchData) // Собираем изображения и акции.
         .onAppear(perform: fetchImages)
         
     }
@@ -92,9 +94,6 @@ struct StockListView: View{
             }  
             
         }
-        
-        
-        
     }
 }
 
@@ -134,6 +133,7 @@ struct SearchBarView: View{
                 Image(systemName: "magnifyingglass")
             })
             .padding()
+            .padding(.trailing, 10)
         }
     }
 }
