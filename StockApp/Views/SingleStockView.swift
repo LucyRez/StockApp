@@ -41,17 +41,19 @@ struct SingleStockView: View {
                             .bold()
                             .font(.system(size: 25))
                         Button(action: {
-                            isFavourite.toggle()
-                            if (stock.isFavourite == false && isFavourite){
+                           
+                            if (!stock.isFavourite){
+                                isFavourite = true
                                 manager.addToFavourites(stock:
                                                             StockInListModel(name: stock.companyName, ticker: stock.symbol, price: stock.latestPrice, delta: stock.change, image: stock.logo, isFavourite: true))
                             }else{
                                 manager.removeFromFavourites(stock: stock)
+                                isFavourite = false
                             }
                             
                         }, label: {
                             
-                            if(stock.isFavourite == true || isFavourite){
+                            if(stock.isFavourite || isFavourite){
                                 Image(systemName: "star.fill")
                                     .foregroundColor(.yellow)
                                     .font(.system(size: 20))

@@ -11,9 +11,12 @@ import UIKit
 final class StockManager: ObservableObject{
     
     @Published var stocks = [Stock]() // Все получаемые акции.
+    @Published var searchStocks = [Stock]()
+    @Published var searchLogos = [CompanyImage]()
     @Published var logos : [CompanyImage]? = [] // Все изображения компаний.
     @Published var favourites = [StockInListModel]() // Массив для записи фаворитов.
     @Published var favouriteFilterOn = false // Булевая переменная указывает включен ли фильтр по фаворитам.
+    @Published var search = ""
    
     // Функция проверяет, принадлежит ли акция к фаворитам или нет.
     func checkInFavourites(ticker: String) -> Bool{
@@ -32,7 +35,9 @@ final class StockManager: ObservableObject{
                 return
             }
         }
+        logos?.append(CompanyImage(image: stock.logo, name: stock.symbol))
         favourites.append(stock)
+        
     }
     
     // Функция осуществляет удаление из массива.
@@ -74,7 +79,12 @@ final class StockManager: ObservableObject{
         downloadGroup.notify(queue: DispatchQueue.global()){
             completion(.success(stockArray))
             DispatchQueue.main.async {
+                if  self.search == ""{
                     self.stocks.append(contentsOf: stockArray)
+                    
+                }else{
+                    self.searchStocks.append(contentsOf: stockArray)
+                }
 
             }
         }
@@ -118,7 +128,12 @@ final class StockManager: ObservableObject{
             completion(.success(companyImages))
             DispatchQueue.main.async {
               
+                if self.search == ""{
                     self.logos!.append(contentsOf: companyImages)
+                    
+                }else{
+                    self.searchLogos.append(contentsOf: companyImages)
+                }
                 
             }
         }

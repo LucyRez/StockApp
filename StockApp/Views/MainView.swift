@@ -78,43 +78,65 @@ struct StockListView: View{
         
     }
     
+    func clearSearch(){
+        manager.searchStocks = []
+    }
+    
     var body: some View{
         VStack(alignment:.leading){
             
             if manager.favouriteFilterOn == false{
-                List(manager.stocks, id: \.symbol){item in
-                    SingleStockView(manager: manager, name: item.companyName, ticker: item.symbol, price: item.latestPrice, delta: item.change, image: manager.logos!.count > 0 ? (manager.logos?.first(where: {$0.name == item.symbol})?.image)! : UIImage(), isFavourite: manager.checkInFavourites(ticker: item.symbol) )
+                if  manager.search != ""{
+                    if manager.searchStocks.count > 0 {
+                        List(manager.searchStocks, id: \.symbol){item in
+                            SingleStockView(manager: manager, name: item.companyName, ticker: item.symbol, price: item.latestPrice, delta: item.change, image: (manager.searchLogos.count > 0 ? (manager.searchLogos.first(where: {$0.name == item.symbol})?.image) : UIImage()) ?? UIImage(), isFavourite: manager.checkInFavourites(ticker: item.symbol) )
+                        }
+                    }else{
+                        Spacer()
+                        Text("Searching...")
+                            .font(.title)
+                            .padding()
+                        Spacer()
+                    }
+                }else{
+                    List(manager.stocks, id: \.symbol){item in
+                        SingleStockView(manager: manager, name: item.companyName, ticker: item.symbol, price: item.latestPrice, delta: item.change, image: (manager.logos?.count ?? 0 > 0 ? (manager.logos?.first(where: {$0.name == item.symbol})?.image) : UIImage()) ?? UIImage(), isFavourite: manager.checkInFavourites(ticker: item.symbol) )
+                    }
+                    .onAppear(perform: clearSearch)
+                    
                 }
                 
-            }else{
+            }
+            else{
                 List(manager.favourites, id: \.symbol){item in
-                    SingleStockView(manager: manager, name: item.companyName, ticker: item.symbol, price: item.latestPrice, delta: item.change, image: manager.logos!.count > 0 ? (manager.logos?.first(where: {$0.name == item.symbol})?.image)! : UIImage(), isFavourite: true)
+                    SingleStockView(manager: manager, name: item.companyName, ticker: item.symbol, price: item.latestPrice, delta: item.change, image:(manager.logos?.count ?? 0 > 0 ? (manager.logos?.first(where: {$0.name == item.symbol})?.image) : UIImage()) ?? UIImage(), isFavourite: true)
                     
                 }
             }  
             
         }
+        
     }
 }
 
 struct SearchBarView: View{
-     @State var str: String = ""
-     @ObservedObject var manager : StockManager
+    @ObservedObject var manager : StockManager
     
     func search(by ticker: String){
         let trimmed = ticker.trimmingCharacters(in: .whitespacesAndNewlines)
         var tickerWrap = [String]()
-        tickerWrap.append(trimmed)
+        tickerWrap.append(trimmed.uppercased())
         
         manager.download(symbols: tickerWrap){_ in
             
         }
-     
+        
         manager.downloadImages(symbols: tickerWrap){_ in
             
         }
         
-       
+        
+        
     }
     
     var body: some View{
@@ -125,11 +147,12 @@ struct SearchBarView: View{
                     .frame(width: .infinity, height: 50)
                     .padding()
                 
-                TextField("Search", text: $str)
+                TextField("Search", text: $manager.search)
                     .padding(30)
+                    
             }
             
-            Button(action: {search(by: str)}, label: {
+            Button(action: {search(by: manager.search)}, label: {
                 Image(systemName: "magnifyingglass")
             })
             .padding()
