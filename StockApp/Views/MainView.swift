@@ -89,7 +89,7 @@ struct StockListView: View{
                 if  manager.search != ""{
                     if manager.searchStocks.count > 0 {
                         List(manager.searchStocks, id: \.symbol){item in
-                            SingleStockView(manager: manager, name: item.companyName, ticker: item.symbol, price: item.latestPrice, delta: item.change, image: (manager.searchLogos.count > 0 ? (manager.searchLogos.first(where: {$0.name == item.symbol})?.image) : UIImage()) ?? UIImage(), isFavourite: manager.checkInFavourites(ticker: item.symbol) )
+                            SingleStockView(manager: manager, name: item.companyName, ticker: item.symbol, price: item.latestPrice, delta: item.change, deltaPercent: item.changePercent, image: (manager.searchLogos.count > 0 ? (manager.searchLogos.first(where: {$0.name == item.symbol})?.image) : UIImage()) ?? UIImage(), isFavourite: manager.checkInFavourites(ticker: item.symbol) )
                         }
                     }else{
                         Spacer()
@@ -100,7 +100,7 @@ struct StockListView: View{
                     }
                 }else{
                     List(manager.stocks, id: \.symbol){item in
-                        SingleStockView(manager: manager, name: item.companyName, ticker: item.symbol, price: item.latestPrice, delta: item.change, image: (manager.logos?.count ?? 0 > 0 ? (manager.logos?.first(where: {$0.name == item.symbol})?.image) : UIImage()) ?? UIImage(), isFavourite: manager.checkInFavourites(ticker: item.symbol) )
+                        SingleStockView(manager: manager, name: item.companyName, ticker: item.symbol, price: item.latestPrice, delta: item.change, deltaPercent: item.changePercent, image: (manager.logos?.count ?? 0 > 0 ? (manager.logos?.first(where: {$0.name == item.symbol})?.image) : UIImage()) ?? UIImage(), isFavourite: manager.checkInFavourites(ticker: item.symbol) )
                     }
                     .onAppear(perform: clearSearch)
                     
@@ -109,7 +109,7 @@ struct StockListView: View{
             }
             else{
                 List(manager.favourites, id: \.symbol){item in
-                    SingleStockView(manager: manager, name: item.companyName, ticker: item.symbol, price: item.latestPrice, delta: item.change, image:(manager.logos?.count ?? 0 > 0 ? (manager.logos?.first(where: {$0.name == item.symbol})?.image) : UIImage()) ?? UIImage(), isFavourite: true)
+                    SingleStockView(manager: manager, name: item.companyName, ticker: item.symbol, price: item.latestPrice, delta: item.change, deltaPercent: item.changePercent, image:(manager.logos?.count ?? 0 > 0 ? (manager.logos?.first(where: {$0.name == item.symbol})?.image) : UIImage()) ?? UIImage(), isFavourite: true)
                     
                 }
             }  
@@ -143,11 +143,11 @@ struct SearchBarView: View{
         HStack{
             ZStack{
                 RoundedRectangle(cornerRadius: 60)
-                    .fill(Color(red: 240/255, green: 244/255, blue: 247/255, opacity: 1))
+                    .stroke(Color.black, lineWidth: 3)
                     .frame(width: .infinity, height: 50)
                     .padding()
                 
-                TextField("Search", text: $manager.search)
+                TextField("Find ticker", text: $manager.search)
                     .padding(30)
                     
             }
@@ -155,8 +155,10 @@ struct SearchBarView: View{
             Button(action: {search(by: manager.search)}, label: {
                 Image(systemName: "magnifyingglass")
             })
-            .padding()
+            .font(.system(size: 25))
+            .padding(.leading, -20)
             .padding(.trailing, 10)
+            .accentColor(Color.black)
         }
     }
 }

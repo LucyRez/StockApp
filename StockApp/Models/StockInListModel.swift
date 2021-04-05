@@ -14,16 +14,18 @@ struct StockInListModel{
     var symbol : String
     var latestPrice : Double
     var change : Double
+    var changePercent : Double
     var logo : UIImage
     var isFavourite : Bool
     
-    init(name: String, ticker: String, price: Double, delta: Double, image: UIImage, isFavourite: Bool){
+    init(name: String, ticker: String, price: Double, delta: Double, deltaPercent: Double, image: UIImage, isFavourite: Bool){
         
         companyName = name
         symbol = ticker
         latestPrice = price
         change = delta
         logo = image
+        changePercent = deltaPercent
         self.isFavourite = isFavourite
     }
     

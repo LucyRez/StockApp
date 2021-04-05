@@ -17,6 +17,7 @@ final class StockManager: ObservableObject{
     @Published var favourites = [StockInListModel]() // Массив для записи фаворитов.
     @Published var favouriteFilterOn = false // Булевая переменная указывает включен ли фильтр по фаворитам.
     @Published var search = ""
+    @Published var showInfo = true
    
     // Функция проверяет, принадлежит ли акция к фаворитам или нет.
     func checkInFavourites(ticker: String) -> Bool{

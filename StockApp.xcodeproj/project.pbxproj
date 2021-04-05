@@ -17,6 +17,7 @@
 		DB2E5DD8260F6B8300280AB0 /* StockManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5DD7260F6B8300280AB0 /* StockManager.swift */; };
 		DB2E5DDB260F9BF400280AB0 /* ImageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5DDA260F9BF300280AB0 /* ImageURL.swift */; };
 		DB2E5DDE260FB94000280AB0 /* CompanyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2E5DDD260FB94000280AB0 /* CompanyImage.swift */; };
+		DB6A580C261B877A00F2F497 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6A580B261B877A00F2F497 /* InfoView.swift */; };
 		DBC88BD426124D4B00F53820 /* StockInListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BD326124D4B00F53820 /* StockInListModel.swift */; };
 		DBC88BD72612636500F53820 /* SingleStockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC88BD62612636500F53820 /* SingleStockView.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		DB2E5DD7260F6B8300280AB0 /* StockManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockManager.swift; sourceTree = "<group>"; };
 		DB2E5DDA260F9BF300280AB0 /* ImageURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageURL.swift; sourceTree = "<group>"; };
 		DB2E5DDD260FB94000280AB0 /* CompanyImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyImage.swift; sourceTree = "<group>"; };
+		DB6A580B261B877A00F2F497 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		DBC88BD326124D4B00F53820 /* StockInListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockInListModel.swift; sourceTree = "<group>"; };
 		DBC88BD62612636500F53820 /* SingleStockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleStockView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +94,7 @@
 			children = (
 				DB2E5DC1260D32A800280AB0 /* MainView.swift */,
 				DBC88BD62612636500F53820 /* SingleStockView.swift */,
+				DB6A580B261B877A00F2F497 /* InfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB2E5DD8260F6B8300280AB0 /* StockManager.swift in Sources */,
+				DB6A580C261B877A00F2F497 /* InfoView.swift in Sources */,
 				DB2E5DDE260FB94000280AB0 /* CompanyImage.swift in Sources */,
 				DB2E5DD5260F650F00280AB0 /* APIManager.swift in Sources */,
 				DB2E5DCC260E771400280AB0 /* Stock.swift in Sources */,
