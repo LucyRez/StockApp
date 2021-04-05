@@ -10,4 +10,4 @@
 - Поиск акции осуществляется по тикеру (поиск через запрос к API)
 
 # Демонстрация
-![Preview](https://media.giphy.com/media/X6l7sjOvmy2yiabMUQ/giphy.gif)
+<iframe src="https://giphy.com/embed/MbBqLXPHRm1xu9cjXi" width="222" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/MbBqLXPHRm1xu9cjXi">via GIPHY</a></p>
